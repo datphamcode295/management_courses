@@ -1,0 +1,89 @@
+register:
+
+sequenceDiagram
+    user->>+web: provide information
+    web->>web: validation
+    web->>+server: send information object
+    server->>+database: checking repeat email
+    alt is valid
+    database-->>server:invalid email    
+    server-->>web: user already exits
+    web-->>user: user already exits
+    else is invalid
+    database-->>server:valid email    
+    server->>database:add user
+    database-->>-server:userid
+    server-->>-web:userid
+    web-->>-user:notify login successful
+
+    end
+    
+    
+login:
+
+sequenceDiagram
+    user->>+web: email + password
+    web->>+server: send information object
+    server->>+database: find user
+    alt user does not exist
+    database-->>server: empty object    
+    server-->>web: user is not exist
+    web-->>user: user is not exist
+    else user exist
+    database-->>-server:user's information   
+    server-->>-web:user's information
+    web-->>-user:notify login successful
+
+    end
+    
+add course:
+
+sequenceDiagram
+    user->>+web: course's information
+    web->>+server: course's information
+    server->>+database: find user
+    
+    alt user does not exist
+    database-->>server: empty object    
+    server-->>web: user is not exist
+    web-->>user: user is not exist
+    else user exist
+    database-->>server:user's information   
+    server->>server:check role
+    alt role is student
+        
+    server-->>web: access denied
+    web-->>user: access denied
+    else role is admin
+    server->>database: add course  
+    database-->>-server:course's information
+    server-->>-web:course's information
+    web-->>-user:notify add course successful
+    end
+    end
+    
+add class:
+
+sequenceDiagram
+    user->>+web: class's information
+    web->>+server: class's information
+    server->>+database: find user
+    
+    alt user does not exist
+    database-->>server: empty object    
+    server-->>web: user is not exist
+    web-->>user: user is not exist
+    else user exist
+    database-->>server:user's information   
+    server->>server:check role
+    alt role is student
+    server-->>web: access denied
+    web-->>user: access denied
+    else role is admin
+    server->>database: add class  
+    database-->>-server:class's information
+    server-->>-web:class's information
+    web-->>-user:notify add class successful
+    end
+    end
+

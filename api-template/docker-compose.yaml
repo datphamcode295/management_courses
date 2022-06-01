@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  mstation_db:
+    image: timescale/timescaledb:2.6.1-pg14
+    container_name: mstation_db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mstation_local

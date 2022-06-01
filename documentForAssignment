@@ -1,0 +1,27 @@
+khóa học
+
+- 1 khóa gồm nhiều lớp
+- một lớp gồm nhiều users
+- 1 user có thể đk vào 1 lớp
+- trong lớp có 1 hoặc nhiều môn học
+
+-> lấy danh sách khóa học
+-> lấy danh sách lớp học của 1 khóa học
+-> lấy danh sách sv của 1 khóa hoặc 1 lớp
+-> lấy ds môn học của 1 sinh viên
+-> tạo thông tin ban đầu cho sinh viên (chưa cần mã hóa)
+-> chỉ cần apis
+-> thêm khóa học
+-> thêm lớp học
+
+
+-> vẽ flow - UML (coqua, draw.io)
+
+
+action: 
+- login
+- search
+- change course
+- add class
+- add course
+

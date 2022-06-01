@@ -1,0 +1,2304 @@
+definitions:
+  battle.AdventureLogData:
+    properties:
+      backgroundJpg:
+        type: string
+      backgroundWebp:
+        type: string
+      battle:
+        $ref: '#/definitions/battle.AdventureReport'
+      battleId:
+        type: integer
+      health:
+        type: integer
+      reward:
+        $ref: '#/definitions/battle.AdventureReward'
+    type: object
+  battle.AdventureReport:
+    properties:
+      battles:
+        items:
+          $ref: '#/definitions/battle.BattleReport'
+        type: array
+      character:
+        $ref: '#/definitions/battle.Fighter'
+      isCharacterWin:
+        type: boolean
+      monsters:
+        items:
+          $ref: '#/definitions/battle.Fighter'
+        type: array
+    type: object
+  battle.AdventureReward:
+    properties:
+      battleReward:
+        items:
+          $ref: '#/definitions/battle.BattleReward'
+        type: array
+      totalRewardBSCD:
+        type: string
+      totalRewardMST:
+        type: string
+    type: object
+  battle.BattleAttribute:
+    properties:
+      accuracy:
+        type: number
+      dameType:
+        type: string
+      defense:
+        type: number
+      health:
+        type: number
+      magicResistance:
+        type: number
+      magicalAttack:
+        type: number
+      maxHealth:
+        type: number
+      physicalAttack:
+        type: number
+    type: object
+  battle.BattleReport:
+    properties:
+      fighterOne:
+        $ref: '#/definitions/battle.Fighter'
+      fighterTwo:
+        $ref: '#/definitions/battle.Fighter'
+      isFighterOneWin:
+        type: boolean
+      turns:
+        items:
+          $ref: '#/definitions/battle.TurnReport'
+        type: array
+    type: object
+  battle.BattleReward:
+    properties:
+      battleNum:
+        type: integer
+      rewardBSCD:
+        type: string
+      rewardMST:
+        type: string
+    type: object
+  battle.Fighter:
+    properties:
+      animatedMP4:
+        type: string
+      animatedWebM:
+        type: string
+      assetId:
+        type: string
+      attribute:
+        $ref: '#/definitions/battle.FighterAttribute'
+      avatar:
+        type: string
+      battleAttribute:
+        $ref: '#/definitions/battle.BattleAttribute'
+      externalId:
+        type: string
+      id:
+        type: string
+      isCharacter:
+        type: boolean
+      level:
+        type: integer
+      name:
+        type: string
+      poster:
+        type: string
+      role:
+        type: string
+      slug:
+        type: string
+    type: object
+  battle.FighterAttribute:
+    properties:
+      courage:
+        type: integer
+      dexterity:
+        type: integer
+      intelligence:
+        type: integer
+      stamina:
+        type: integer
+      strength:
+        type: integer
+      vitality:
+        type: integer
+    type: object
+  battle.TurnReport:
+    properties:
+      dameTaken:
+        type: number
+      fighterOneHealthEnd:
+        type: number
+      fighterOneHealthStart:
+        type: number
+      fighterOneId:
+        type: string
+      fighterTwoHealthEnd:
+        type: number
+      fighterTwoHealthStart:
+        type: number
+      fighterTwoId:
+        type: string
+      isFighterOneAttack:
+        type: boolean
+      isMissed:
+        type: boolean
+      randomNumber:
+        type: number
+      turnNumber:
+        type: integer
+    type: object
+  errors.Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  handler.ChallengeData:
+    properties:
+      challenge:
+        type: string
+    type: object
+  handler.ReferralCodeData:
+    properties:
+      isBonded:
+        type: boolean
+      referralCode:
+        type: string
+      referrerCode:
+        type: string
+    type: object
+  handler.RewardInfo:
+    properties:
+      referralProgram:
+        items:
+          $ref: '#/definitions/model.ReferralProgram'
+        type: array
+      reward:
+        type: number
+      topBonus:
+        type: number
+      totalFriend:
+        type: integer
+    type: object
+  handler.adventureLogResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.AdventureLogData'
+        type: array
+      metadata:
+        $ref: '#/definitions/model.Pagination'
+    type: object
+  handler.adventureRequest:
+    properties:
+      adventureId:
+        type: string
+      adventureLevel:
+        type: integer
+      characterId:
+        type: string
+    type: object
+  handler.adventureResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.AdventureData'
+        type: array
+      metadata:
+        $ref: '#/definitions/model.Pagination'
+    type: object
+  handler.characterDetailResponse:
+    properties:
+      data:
+        $ref: '#/definitions/model.CharacterData'
+    type: object
+  handler.characterPillInfo:
+    properties:
+      animatedMP4:
+        type: string
+      animatedWebM:
+        type: string
+      health:
+        type: integer
+      id:
+        type: string
+      level:
+        type: integer
+      maxScore:
+        type: integer
+      name:
+        type: string
+      rarity:
+        type: string
+      requiredAmountBSCD:
+        type: number
+      requiredAmountMST:
+        type: number
+      tokenId:
+        type: string
+      totalScore:
+        type: integer
+    type: object
+  handler.characterPillInfoResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.characterPillInfo'
+    type: object
+  handler.characterRefillInfo:
+    properties:
+      animatedMP4:
+        type: string
+      animatedWebM:
+        type: string
+      id:
+        type: string
+      maxScore:
+        type: integer
+      name:
+        type: string
+      productivity:
+        type: integer
+      rarity:
+        type: string
+      requiredAmount:
+        type: integer
+      token:
+        type: string
+      tokenId:
+        type: string
+      totalScore:
+        type: integer
+    type: object
+  handler.characterRefillInfoResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.characterRefillInfo'
+    type: object
+  handler.claimReferralRewardRequest:
+    properties:
+      txHash:
+        type: string
+    type: object
+  handler.claimReferralRewardResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.claimReferralRewardSetup:
+    properties:
+      claimId:
+        type: integer
+      signature:
+        type: string
+      totalAmount:
+        type: number
+    type: object
+  handler.claimReferralRewardSetupResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.claimReferralRewardSetup'
+    type: object
+  handler.claimRewardCombatRequest:
+    properties:
+      txHash:
+        type: string
+    type: object
+  handler.claimRewardCombatResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.claimSalaryRequest:
+    properties:
+      poolId:
+        type: integer
+      txHash:
+        type: string
+    type: object
+  handler.claimSalaryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.dailyWorkResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.DailyWorkData'
+        type: array
+      metadata:
+        $ref: '#/definitions/model.Pagination'
+    type: object
+  handler.failAdventureRequest:
+    properties:
+      tokenId:
+        type: string
+    type: object
+  handler.failAdventureResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.filterWorkingInfoData:
+    properties:
+      name:
+        type: string
+      slug:
+        type: string
+    type: object
+  handler.getChallengeResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.ChallengeData'
+    type: object
+  handler.getReferralCodeResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.ReferralCodeData'
+    type: object
+  handler.getReferralRewardInfoResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.RewardInfo'
+    type: object
+  handler.initAdventureData:
+    properties:
+      battleInfo:
+        items:
+          type: integer
+        type: array
+      monsterIds:
+        items:
+          type: integer
+        type: array
+      nftAddress:
+        type: string
+      results:
+        items:
+          type: integer
+        type: array
+      signature:
+        type: string
+      tokenId:
+        type: string
+    type: object
+  handler.initAdventureResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.initAdventureData'
+    type: object
+  handler.leaderboardTopLevelResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.LeaderboardTopLevelCharacterData'
+        type: array
+      metadata:
+        $ref: '#/definitions/model.Pagination'
+    type: object
+  handler.mintCharacterRequest:
+    properties:
+      txHash:
+        type: string
+    type: object
+  handler.mintPackCharacterRequest:
+    properties:
+      txHash:
+        type: string
+    type: object
+  handler.mintPackCharacterResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.CharacterData'
+        type: array
+    type: object
+  handler.myCrewResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.CharacterData'
+        type: array
+      metadata:
+        $ref: '#/definitions/model.Pagination'
+    type: object
+  handler.myWorkingInfoResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.CharacterWorkingData'
+        type: array
+      metadata:
+        $ref: '#/definitions/model.Pagination'
+      summaryInfo:
+        $ref: '#/definitions/model.SummaryWorkingData'
+    type: object
+  handler.myWorkingInfoSummaryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/model.SummaryWorkingData'
+    type: object
+  handler.quitWorkingRequest:
+    properties:
+      poolId:
+        type: integer
+      txHash:
+        type: string
+    type: object
+  handler.quitWorkingResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.refillEnergyRequest:
+    properties:
+      txHash:
+        type: string
+    type: object
+  handler.refillEnergyResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.responseData:
+    properties:
+      message:
+        type: string
+    type: object
+  handler.startAdventureRequest:
+    properties:
+      txHash:
+        type: string
+    type: object
+  handler.startAdventureResponse:
+    properties:
+      data:
+        $ref: '#/definitions/battle.AdventureLogData'
+    type: object
+  handler.startWorkingRequest:
+    properties:
+      poolId:
+        type: integer
+      txHash:
+        type: string
+    type: object
+  handler.startWorkingResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.suggestionCharacterAdventureResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.AdventureSuggestedCharactersByDungeonLevel'
+        type: array
+    type: object
+  handler.suggestionCharacterAdventuresResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.AdventureSuggestedCharacters'
+        type: array
+    type: object
+  handler.suggestionCharacterMineResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.CharacterData'
+        type: array
+    type: object
+  handler.suggestionCharacterMinesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.DailyWorkSuggestedCharacters'
+        type: array
+    type: object
+  handler.transferCharacterRequest:
+    properties:
+      characterId:
+        type: string
+      txHash:
+        type: string
+    type: object
+  handler.transferCharacterResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.unclaimedRewardsAdventureLogResponse:
+    properties:
+      data:
+        $ref: '#/definitions/model.UnclaimedRewardsAdventureLogData'
+    type: object
+  handler.updgradeCharacterRequest:
+    properties:
+      txHash:
+        type: string
+    type: object
+  handler.upgradeCharacterInfo:
+    properties:
+      feeBSCD:
+        type: number
+      feeMST:
+        type: number
+      level:
+        type: integer
+      successRate:
+        type: number
+    type: object
+  handler.upgradeCharacterInfoResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.upgradeCharacterInfo'
+    type: object
+  handler.upgradeCharacterResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.upgradeCharacterResult'
+    type: object
+  handler.upgradeCharacterResult:
+    properties:
+      result:
+        type: string
+    type: object
+  handler.upsertWalletResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.usePillRequest:
+    properties:
+      txHash:
+        type: string
+    type: object
+  handler.usePillResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.responseData'
+    type: object
+  handler.workingInfoFilterResponse:
+    properties:
+      location:
+        items:
+          $ref: '#/definitions/handler.filterWorkingInfoData'
+        type: array
+      name:
+        items:
+          $ref: '#/definitions/handler.filterWorkingInfoData'
+        type: array
+    type: object
+  model.AdventureData:
+    properties:
+      adventureProbabilities:
+        items:
+          $ref: '#/definitions/model.AdventureProbability'
+        type: array
+      assetId:
+        type: string
+      banner:
+        type: string
+      bannerJPG:
+        type: string
+      bannerWebP:
+        type: string
+      description:
+        type: string
+      dungeonCost:
+        items:
+          type: number
+        type: array
+      enemies:
+        items:
+          $ref: '#/definitions/model.AdventureEnemies'
+        type: array
+      id:
+        type: string
+      name:
+        type: string
+      poolId:
+        type: integer
+      requirement:
+        $ref: '#/definitions/model.AdventureRequirement'
+      slug:
+        type: string
+      status:
+        type: string
+    type: object
+  model.AdventureEnemies:
+    properties:
+      name:
+        type: string
+      slug:
+        type: string
+      type:
+        type: string
+    type: object
+  model.AdventureLogData:
+    properties:
+      adventure:
+        $ref: '#/definitions/model.AdventureData'
+      adventureLevel:
+        type: integer
+      character:
+        $ref: '#/definitions/model.CharacterData'
+      createdAt:
+        type: string
+      id:
+        type: string
+      isWin:
+        type: boolean
+      monsters:
+        items:
+          type: string
+        type: array
+      owner_address:
+        type: string
+      reward:
+        $ref: '#/definitions/model.AdventureLogReward'
+    type: object
+  model.AdventureLogReward:
+    properties:
+      battleReward:
+        items:
+          $ref: '#/definitions/model.BattleRewardLog'
+        type: array
+      totalRewardBSCD:
+        type: string
+      totalRewardMST:
+        type: string
+    type: object
+  model.AdventureProbability:
+    properties:
+      adventureLevel:
+        type: integer
+      characterLevel:
+        type: integer
+      numBoss:
+        type: integer
+      numCreep:
+        type: integer
+      probability:
+        $ref: '#/definitions/model.RarityProbability'
+    type: object
+  model.AdventureRequirement:
+    properties:
+      levelRange:
+        items:
+          type: integer
+        type: array
+    type: object
+  model.AdventureSuggestedCharacters:
+    properties:
+      characters:
+        items:
+          $ref: '#/definitions/model.CharacterData'
+        type: array
+      name:
+        type: string
+      poolId:
+        type: integer
+      slug:
+        type: string
+    type: object
+  model.AdventureSuggestedCharactersByDungeonLevel:
+    properties:
+      characters:
+        items:
+          $ref: '#/definitions/model.CharacterData'
+        type: array
+      dungeonCost:
+        type: number
+      dungeonLevel:
+        type: integer
+    type: object
+  model.AttributeData:
+    properties:
+      name:
+        type: string
+      value:
+        type: integer
+    type: object
+  model.AttributeRequirement:
+    properties:
+      isAdvantage:
+        type: boolean
+      name:
+        type: string
+      value:
+        type: integer
+    type: object
+  model.BattleRewardLog:
+    properties:
+      battleNum:
+        type: integer
+      rewardBSCD:
+        type: string
+      rewardMST:
+        type: string
+    type: object
+  model.CharacterData:
+    properties:
+      advantage:
+        type: string
+      adventureChance:
+        type: integer
+      adventureTicketCost:
+        type: integer
+      animatedMP4:
+        type: string
+      animatedWebM:
+        type: string
+      courage:
+        type: integer
+      dameType:
+        type: string
+      description:
+        type: string
+      dexterity:
+        type: integer
+      disadvantage:
+        type: string
+      health:
+        type: integer
+      holderAddress:
+        type: string
+      id:
+        type: string
+      intelligence:
+        type: integer
+      level:
+        type: integer
+      maxScore:
+        type: integer
+      name:
+        type: string
+      nextAdventureTime:
+        type: string
+      nftAddress:
+        type: string
+      ownerAddress:
+        type: string
+      portrait:
+        type: string
+      poster:
+        type: string
+      productivity:
+        type: integer
+      rarity:
+        type: string
+      role:
+        type: string
+      stamina:
+        type: integer
+      static:
+        type: string
+      stationRequired:
+        type: string
+      status:
+        type: string
+      strength:
+        type: integer
+      tier:
+        type: string
+      tokenId:
+        type: string
+      totalScore:
+        type: integer
+      vitality:
+        type: integer
+    type: object
+  model.CharacterWorkingData:
+    properties:
+      advantage:
+        $ref: '#/definitions/model.AttributeData'
+      courage:
+        type: integer
+      dexterity:
+        type: integer
+      id:
+        type: string
+      intelligence:
+        type: integer
+      level:
+        type: integer
+      location:
+        type: string
+      maxScore:
+        type: integer
+      name:
+        type: string
+      nftAddress:
+        type: string
+      poolId:
+        type: integer
+      productivity:
+        type: integer
+      salaryAmount:
+        type: number
+      salaryToken:
+        type: string
+      stamina:
+        type: integer
+      stationRequired:
+        $ref: '#/definitions/model.AttributeData'
+      status:
+        type: string
+      strength:
+        type: integer
+      tokenId:
+        type: string
+      totalScore:
+        type: integer
+      vitality:
+        type: integer
+      workingBlock:
+        type: integer
+    type: object
+  model.DailyWorkData:
+    properties:
+      assetId:
+        type: string
+      banner:
+        type: string
+      bannerJPG:
+        type: string
+      bannerWebP:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      poolId:
+        type: integer
+      requirement:
+        items:
+          $ref: '#/definitions/model.WorkRequirement'
+        type: array
+      slug:
+        type: string
+      status:
+        type: string
+    type: object
+  model.DailyWorkSuggestedCharacters:
+    properties:
+      characters:
+        items:
+          $ref: '#/definitions/model.CharacterData'
+        type: array
+      name:
+        type: string
+      poolId:
+        type: integer
+      slug:
+        type: string
+    type: object
+  model.LeaderboardTopLevelCharacterData:
+    properties:
+      animatedMP4:
+        type: string
+      animatedWebM:
+        type: string
+      level:
+        type: integer
+      maxScore:
+        type: integer
+      name:
+        type: string
+      ownerAddress:
+        type: string
+      portrait:
+        type: string
+      poster:
+        type: string
+      ranking:
+        type: integer
+      static:
+        type: string
+      tokenId:
+        type: string
+      totalScore:
+        type: integer
+    type: object
+  model.Pagination:
+    properties:
+      pageCount:
+        type: integer
+      pageNumber:
+        type: integer
+      pageSize:
+        type: integer
+      totalCount:
+        type: integer
+    type: object
+  model.RarityProbability:
+    properties:
+      common:
+        type: integer
+      elite:
+        type: integer
+      epic:
+        type: integer
+      legendary:
+        type: integer
+      rare:
+        type: integer
+    type: object
+  model.ReferralProgram:
+    properties:
+      referral_date:
+        type: string
+      totalReward:
+        type: number
+      userAddress:
+        type: string
+    type: object
+  model.SummaryWorkingData:
+    properties:
+      homeHero:
+        type: integer
+      miningRatio:
+        type: number
+      unclaimedReward:
+        type: number
+      workHero:
+        type: integer
+    type: object
+  model.UnclaimedRewardsAdventureLogData:
+    properties:
+      unclaimedRewardBSCD:
+        type: string
+      unclaimedRewardMST:
+        type: string
+    type: object
+  model.WorkRequirement:
+    properties:
+      attributes:
+        items:
+          $ref: '#/definitions/model.AttributeRequirement'
+        type: array
+      level:
+        type: integer
+      role:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/adventure:
+    get:
+      consumes:
+      - application/json
+      description: get adventure
+      parameters:
+      - description: pageNumber
+        in: query
+        name: pageNumber
+        type: string
+      - description: pageSize
+        in: query
+        name: pageSize
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.adventureResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get adventure
+      tags:
+      - Adventure
+  /api/v1/adventure/battle/{:id}:
+    get:
+      consumes:
+      - application/json
+      description: get adventure battle log
+      parameters:
+      - description: battle id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.startAdventureResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get adventure battle log
+      tags:
+      - Adventure
+  /api/v1/adventure/claim-reward:
+    post:
+      consumes:
+      - application/json
+      description: claim reward combat
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: claim reward combat request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.claimRewardCombatRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.claimRewardCombatResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: claim reward combat
+      tags:
+      - Adventure
+  /api/v1/adventure/fail:
+    post:
+      consumes:
+      - application/json
+      description: fail adventure
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: fail adventure request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.failAdventureRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.failAdventureResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      summary: fail adventure
+      tags:
+      - Adventure
+  /api/v1/adventure/init:
+    post:
+      consumes:
+      - application/json
+      description: init adventure
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: init adventure request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.adventureRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.initAdventureResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      summary: init adventure
+      tags:
+      - Adventure
+  /api/v1/adventure/logs:
+    get:
+      consumes:
+      - application/json
+      description: get adventure log
+      parameters:
+      - description: pageNumber
+        in: query
+        name: pageNumber
+        type: string
+      - description: pageSize
+        in: query
+        name: pageSize
+        type: string
+      - description: walletAddress
+        in: query
+        name: walletAddress
+        required: true
+        type: string
+      - description: adventureId
+        in: query
+        name: adventureId
+        type: string
+      - description: adventureLevel
+        in: query
+        name: adventureLevel
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: isWin
+        in: query
+        name: isWin
+        type: boolean
+      - description: battleId
+        in: query
+        name: battleId
+        type: string
+      - description: txHash
+        in: query
+        name: txHash
+        type: string
+      - description: isClaimed
+        in: query
+        name: isClaimed
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.adventureLogResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get adventure log
+      tags:
+      - Adventure
+  /api/v1/adventure/logs/unclaimed-rewards:
+    get:
+      consumes:
+      - application/json
+      description: get unclaimed rewards adventure log
+      parameters:
+      - description: walletAddress
+        in: query
+        name: walletAddress
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.unclaimedRewardsAdventureLogResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get unclaimed rewards adventure log
+      tags:
+      - Adventure
+  /api/v1/adventure/start:
+    post:
+      consumes:
+      - application/json
+      description: start adventure
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: start adventure request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.startAdventureRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.startAdventureResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: start adventure
+      tags:
+      - Adventure
+  /api/v1/adventure/suggestion/:id:
+    get:
+      consumes:
+      - application/json
+      description: get suggestion character for adventure pool
+      parameters:
+      - description: walletAddress
+        in: query
+        name: walletAddress
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.suggestionCharacterAdventureResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get suggestion character for adventure pool
+      tags:
+      - Adventure
+  /api/v1/adventure/suggestions:
+    get:
+      consumes:
+      - application/json
+      description: get suggestion character for all active adventure pools
+      parameters:
+      - description: walletAddress
+        in: query
+        name: walletAddress
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.suggestionCharacterAdventuresResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get suggestion character for all active adventure pools
+      tags:
+      - Adventure
+  /api/v1/auth/challenge:
+    get:
+      consumes:
+      - application/json
+      description: get challenge
+      parameters:
+      - description: wallet address
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.getChallengeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get challenge
+      tags:
+      - Authentication
+  /api/v1/auth/upsert-wallet:
+    post:
+      consumes:
+      - application/json
+      description: upsert wallet address
+      parameters:
+      - description: wallet address
+        in: query
+        name: walletAddress
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.upsertWalletResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: upsert wallet address
+      tags:
+      - Authentication
+  /api/v1/crew/character:
+    get:
+      consumes:
+      - application/json
+      description: get my crew
+      parameters:
+      - description: wallet address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: pageNumber
+        in: query
+        name: pageNumber
+        required: true
+        type: string
+      - description: pageSize
+        in: query
+        name: pageSize
+        required: true
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: role
+        in: query
+        name: role
+        type: string
+      - description: dameType
+        in: query
+        name: dameType
+        type: string
+      - description: advantage
+        in: query
+        name: advantage
+        type: string
+      - description: disadvantage
+        in: query
+        name: disadvantage
+        type: string
+      - description: asc | desc
+        in: query
+        name: tierSort
+        type: string
+      - description: asc | desc
+        in: query
+        name: raritySort
+        type: string
+      - description: asc | desc
+        in: query
+        name: totalWorkedBlockSort
+        type: string
+      - description: asc | desc
+        in: query
+        name: levelSort
+        type: string
+      - description: asc | desc
+        in: query
+        name: strengthSort
+        type: string
+      - description: asc | desc
+        in: query
+        name: staminaSort
+        type: string
+      - description: asc | desc
+        in: query
+        name: vitalitySort
+        type: string
+      - description: asc | desc
+        in: query
+        name: courageSort
+        type: string
+      - description: asc | desc
+        in: query
+        name: dexteritySort
+        type: string
+      - description: asc | desc
+        in: query
+        name: intelligenceSort
+        type: string
+      - description: asc | desc
+        in: query
+        name: adventureChanceSort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.myCrewResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: get my crew
+      tags:
+      - Crew
+  /api/v1/crew/character/:id:
+    get:
+      consumes:
+      - application/json
+      description: get character etail by id
+      parameters:
+      - description: wallet address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.characterDetailResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: get character etail by id
+      tags:
+      - Crew
+  /api/v1/crew/character/pill:
+    post:
+      consumes:
+      - application/json
+      description: use pill
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: use pill request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.usePillRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.usePillResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: use pill
+      tags:
+      - Crew
+  /api/v1/crew/character/pill/:id:
+    get:
+      consumes:
+      - application/json
+      description: get pill info
+      parameters:
+      - description: character id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.characterPillInfoResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get pill info
+      tags:
+      - Crew
+  /api/v1/crew/character/refill:
+    post:
+      consumes:
+      - application/json
+      description: refill energy
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: refill energy request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.refillEnergyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.refillEnergyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: refill energy
+      tags:
+      - Crew
+  /api/v1/crew/character/refill/:id:
+    get:
+      consumes:
+      - application/json
+      description: get refill energy info
+      parameters:
+      - description: character id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.characterRefillInfoResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get refill energy info
+      tags:
+      - Crew
+  /api/v1/crew/character/transfer:
+    post:
+      consumes:
+      - application/json
+      description: transfer character
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: transfer character request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.transferCharacterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.transferCharacterResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: transfer character
+      tags:
+      - Crew
+  /api/v1/daily-work:
+    get:
+      consumes:
+      - application/json
+      description: get daily work
+      parameters:
+      - description: pageNumber
+        in: query
+        name: pageNumber
+        type: string
+      - description: pageSize
+        in: query
+        name: pageSize
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.dailyWorkResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get daily work
+      tags:
+      - Daily Work
+  /api/v1/daily-work/claim-salary:
+    post:
+      consumes:
+      - application/json
+      description: claim salary
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: claim salary request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.claimSalaryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.claimSalaryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: claim salary
+      tags:
+      - Daily Work
+  /api/v1/daily-work/info:
+    get:
+      consumes:
+      - application/json
+      description: get my working info
+      parameters:
+      - description: wallet address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: character name slug
+        in: query
+        name: name
+        type: string
+      - description: work slug
+        in: query
+        name: location
+        type: string
+      - description: total_score | level | salary
+        in: query
+        name: sortField
+        type: string
+      - description: asc | desc
+        in: query
+        name: sortOrder
+        type: string
+      - description: pageNumber
+        in: query
+        name: pageNumber
+        required: true
+        type: string
+      - description: page size
+        in: query
+        name: pageSize
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.myWorkingInfoResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get my working info
+      tags:
+      - Daily Work
+  /api/v1/daily-work/quit:
+    post:
+      consumes:
+      - application/json
+      description: quit working
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: quit working request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.quitWorkingRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.quitWorkingResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: quit working
+      tags:
+      - Daily Work
+  /api/v1/daily-work/start:
+    post:
+      consumes:
+      - application/json
+      description: start working
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: start working request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.startWorkingRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.startWorkingResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: start working
+      tags:
+      - Daily Work
+  /api/v1/daily-work/suggestion/:id:
+    get:
+      consumes:
+      - application/json
+      description: get suggestion character for pool
+      parameters:
+      - description: walletAddress
+        in: query
+        name: walletAddress
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.suggestionCharacterMineResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get suggestion character for pool
+      tags:
+      - Daily Work
+  /api/v1/daily-work/suggestions:
+    get:
+      consumes:
+      - application/json
+      description: get suggestion character for all active pools
+      parameters:
+      - description: walletAddress
+        in: query
+        name: walletAddress
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.suggestionCharacterMinesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get suggestion character for all active pools
+      tags:
+      - Daily Work
+  /api/v1/daily-work/summary-info:
+    get:
+      consumes:
+      - application/json
+      description: get my working summary info
+      parameters:
+      - description: wallet address
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.myWorkingInfoSummaryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get my working summary info
+      tags:
+      - Daily Work
+  /api/v1/daily-work/working-filter:
+    get:
+      consumes:
+      - application/json
+      description: get my working filter info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.workingInfoFilterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get my working filter info
+      tags:
+      - Daily Work
+  /api/v1/game/pack-recruit:
+    post:
+      consumes:
+      - application/json
+      description: mint character
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: mint pack character request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.mintPackCharacterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.mintPackCharacterResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: mint character
+      tags:
+      - Game
+  /api/v1/game/recruit:
+    post:
+      consumes:
+      - application/json
+      description: mint character
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: mint character request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.mintCharacterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.characterDetailResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: mint character
+      tags:
+      - Game
+  /api/v1/game/upgrade:
+    post:
+      consumes:
+      - application/json
+      description: upgrade character
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: upgrade character request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.updgradeCharacterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.upgradeCharacterResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: upgrade character
+      tags:
+      - Game
+  /api/v1/game/upgrade-info/:id:
+    get:
+      consumes:
+      - application/json
+      description: upgrade character info
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.upgradeCharacterInfoResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: upgrade character info
+      tags:
+      - Game
+  /api/v1/leaderboard/top-level:
+    get:
+      consumes:
+      - application/json
+      description: get leaderboard top level
+      parameters:
+      - description: pageNumber
+        in: query
+        name: pageNumber
+        required: true
+        type: string
+      - description: pageSize
+        in: query
+        name: pageSize
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.leaderboardTopLevelResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: get leaderboard top level
+      tags:
+      - Leaderboard
+  /api/v1/referral/bond:
+    post:
+      consumes:
+      - application/json
+      description: bond referral code handler
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: referrer's referral code
+        in: query
+        name: referralCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.responseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: bond referral code handler
+      tags:
+      - Referral
+  /api/v1/referral/claim:
+    post:
+      consumes:
+      - application/json
+      description: claim referral reward handler
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: claim referral request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.claimReferralRewardRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.claimReferralRewardResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: claim referral reward handler
+      tags:
+      - Referral
+  /api/v1/referral/claim-setup:
+    post:
+      consumes:
+      - application/json
+      description: get claim id for referral reward handler
+      parameters:
+      - description: challenge string
+        in: header
+        name: Challenge
+        required: true
+        type: string
+      - description: 'signature '
+        in: header
+        name: Signature
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.claimReferralRewardSetupResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: get claim id for referral reward handler
+      tags:
+      - Referral
+  /api/v1/referral/code:
+    get:
+      consumes:
+      - application/json
+      description: get referral code handler
+      parameters:
+      - description: wallet address
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.getReferralCodeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errors.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: get referral code handler
+      tags:
+      - Referral
+  /api/v1/referral/reward-info:
+    get:
+      consumes:
+      - application/json
+      description: get referral reward info handler
+      parameters:
+      - description: owner address
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/handler.getReferralRewardInfoResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: get referral reward info handler
+      tags:
+      - Referral
+swagger: "2.0"
