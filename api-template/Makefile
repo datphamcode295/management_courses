@@ -24,9 +24,12 @@ test:
 	@PROJECT_PATH=$(shell pwd) go test -cover ./...
 
 
+setup:
+	cd ~ && go get -v github.com/rubenv/sql-migrate/..
+	
 .PHONY: migrate
 migrate:
-	sql-migrate up -env=$(env)
+	@sql-migrate up -env=$(env)
 
 .PHONY: gen-swagger
 gen-swagger:

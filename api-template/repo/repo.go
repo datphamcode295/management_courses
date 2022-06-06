@@ -8,6 +8,10 @@ type Repo struct {
 	Transaction    TransactionRepo
 	ProcessedBlock ProcessedBlockRepo
 	User           UserRepo
+	Class          ClassRepo
+	Client         ClientRepo
+	Course         CourseRepo
+	CourseAtClass  CourseAtClassRepo
 }
 
 type TransactionRepo interface {
@@ -29,3 +33,14 @@ type UserRepo interface {
 	GetTotalFriendById(s DBRepo, ownerAddress string) (int64, error)
 	GetFriendsWithReferralReward(s DBRepo, id string, address string) ([]model.User, error)
 }
+
+type ClassRepo interface {
+	GetAllClasses(s DBRepo) ([]model.Class, error)
+	PostClass(s DBRepo, param model.Class) (*model.Class, error)
+}
+
+type ClientRepo interface{}
+
+type CourseRepo interface{}
+
+type CourseAtClassRepo interface{}

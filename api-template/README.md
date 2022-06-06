@@ -7,3 +7,5 @@
 3. make run
 4. make indexer
 ```
+
+sql-migrate new -env=local create_student

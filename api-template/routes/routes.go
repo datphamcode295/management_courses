@@ -15,4 +15,10 @@ func NewRoutes(e *echo.Echo, h *handler.Handler, cfg config.Config, s repo.DBRep
 		authGroup.POST("/upsert-wallet", h.UpsertWalletHandler)
 		authGroup.GET("/challenge", h.GetChallengeHandler)
 	}
+
+	courseGroup := apiV1Group.Group(("/class"))
+	{
+		courseGroup.GET("/all", h.GetAllClass)
+		courseGroup.POST("/add", h.AddClass)
+	}
 }
