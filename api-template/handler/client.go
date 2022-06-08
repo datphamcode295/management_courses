@@ -27,6 +27,13 @@ func (h *Handler) AddClient(c echo.Context) error {
 	role := c.QueryParam("role")
 	name := c.QueryParam("name")
 
+	//check double username
+	user, _ := h.repo.Client.GetByUsername(h.store, username)
+
+	if user.Password != "" {
+		return util.HandleError(c, errors.ErrClientAlreadyExits)
+	}
+
 	param := model.Client{Username: username, Password: password, ClassID: classid, Role: role, Name: name}
 	client, err := h.repo.Client.PostClient(h.store, param)
 

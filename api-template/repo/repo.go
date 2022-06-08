@@ -48,6 +48,7 @@ type ClientRepo interface {
 	Delete(s DBRepo, id string) (*model.Client, error)
 	UpdatePassword(s DBRepo, id string, password string) (*model.Client, error)
 	CheckingLogin(s DBRepo, username string, password string) (*model.Client, error)
+	GetByUsername(s DBRepo, username string) (*model.Client, error)
 }
 
 type CourseRepo interface {

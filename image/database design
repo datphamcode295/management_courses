@@ -1,26 +1,38 @@
 //https://dbdiagram.io/d/6297188954ce2635273a767e
 
-Table courses {
-  id int [pk]
-  start_day date
-  class_id int
+
+Table course {
+  id text [pk]
+  name text
+  lecturer text
 }
 
-Ref: courses.class_id < classes.id
 
-Table users {
-  id int [pk]
+
+Table client {
+  id text [pk]
+  username text
+  password text
   name varchar(30)
   role varchar(10)
   class_id int
   
 }
 
-Ref : users.class_id - classes.id
+Ref : client.class_id - class.id
 
-Table classes {
-  id int [pk]
-
+Table class {
+  id text [pk]
+  name text
 }
+
+Table course_at_class{
+  id text [pk]
+  class_id text
+  course_id text
+}
+
+Ref : course_at_class.class_id - class.id
+Ref : course_at_class.course_id - course.id
 
 
