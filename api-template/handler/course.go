@@ -12,11 +12,10 @@ import (
 func (h *Handler) GetAllCourse(c echo.Context) error {
 	sliceClasses, err := h.repo.Course.GetAllCourses(h.store)
 
-	c.JSON(http.StatusOK, sliceClasses)
 	if err != nil {
 		return util.HandleError(c, errors.ErrInternalServerError)
 	}
-	return nil
+	return c.JSON(http.StatusOK, sliceClasses)
 
 }
 
@@ -38,12 +37,10 @@ func (h *Handler) AddCourse(c echo.Context) error {
 	param := model.Course{Name: name, Lecturer: lecturer}
 	course, err := h.repo.Course.PostCourse(h.store, param)
 
-	c.JSON(http.StatusOK, course)
-
 	if err != nil {
 		return util.HandleError(c, errors.ErrInternalServerError)
 	}
-	return nil
+	return c.JSON(http.StatusOK, course)
 }
 
 func (h *Handler) DeleteCourseByID(c echo.Context) error {
@@ -51,6 +48,7 @@ func (h *Handler) DeleteCourseByID(c echo.Context) error {
 
 	username := c.QueryParam("username")
 	password := c.QueryParam("password")
+	//check role of the user
 	role, checkerr := h.GetRole(c, username, password)
 	if checkerr != nil {
 		return util.HandleError(c, checkerr)
@@ -59,15 +57,19 @@ func (h *Handler) DeleteCourseByID(c echo.Context) error {
 		return util.HandleError(c, errors.ErrUnAuthorized)
 	}
 
-	_, err := h.repo.Course.DeleteByID(h.store, id)
+	//check course id exits
+	course, _ := h.repo.Course.GetCourseById(h.store, id)
+	if course.Name == "" {
+		return util.HandleError(c, errors.ErrCourseNotfound)
+	}
 
-	c.JSON(http.StatusOK, "delete successfully the course with id: "+id)
+	_, err := h.repo.Course.DeleteByID(h.store, id)
 
 	if err != nil {
 		return util.HandleError(c, err)
 	}
 
-	return nil
+	return c.JSON(http.StatusOK, "delete successfully the course with id: "+id)
 }
 
 func (h *Handler) FindAllClasses(c echo.Context) error {
@@ -88,7 +90,5 @@ func (h *Handler) FindAllClasses(c echo.Context) error {
 		classes = append(classes, *temp)
 	}
 
-	c.JSON(http.StatusOK, classes)
-
-	return nil
+	return c.JSON(http.StatusOK, classes)
 }

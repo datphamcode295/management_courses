@@ -26,6 +26,13 @@ func (t *clientRepo) GetByUsername(s repo.DBRepo, username string) (*model.Clien
 	return &client, db.Find(&client, "username =?", username).Error
 }
 
+func (t *clientRepo) GetByID(s repo.DBRepo, id string) (*model.Client, error) {
+	client := model.Client{}
+	db := s.DB()
+
+	return &client, db.Find(&client, "id =?", id).Error
+}
+
 func (t *clientRepo) PostClient(s repo.DBRepo, param model.Client) (*model.Client, error) {
 
 	db := s.DB()

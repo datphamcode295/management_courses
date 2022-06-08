@@ -12,13 +12,11 @@ import (
 func (h *Handler) GetAllAts(c echo.Context) error {
 	ats, err := h.repo.CourseAtClass.GetAll(h.store)
 
-	c.JSON(http.StatusOK, ats)
-
 	if err != nil {
 		return util.HandleError(c, errors.ErrInternalServerError)
 	}
 
-	return nil
+	return c.JSON(http.StatusOK, ats)
 }
 func (h *Handler) FindAtsByID(c echo.Context) error {
 	id := c.Param("id")
@@ -29,9 +27,8 @@ func (h *Handler) FindAtsByID(c echo.Context) error {
 	if at.ClassId == "" {
 		return util.HandleError(c, errors.ErrAtNotfound)
 	}
-	c.JSON(http.StatusOK, at)
 
-	return nil
+	return c.JSON(http.StatusOK, at)
 }
 func (h *Handler) AddAts(c echo.Context) error {
 	classid := c.QueryParam("classid")
@@ -51,13 +48,11 @@ func (h *Handler) AddAts(c echo.Context) error {
 
 	ats, err := h.repo.CourseAtClass.PostAts(h.store, param)
 
-	c.JSON(http.StatusOK, ats)
-
 	if err != nil {
 		return util.HandleError(c, err)
 	}
 
-	return nil
+	return c.JSON(http.StatusOK, ats)
 }
 
 func (h *Handler) DeleteAtsByID(c echo.Context) error {
@@ -73,13 +68,17 @@ func (h *Handler) DeleteAtsByID(c echo.Context) error {
 		return util.HandleError(c, errors.ErrUnAuthorized)
 	}
 
-	_, err := h.repo.CourseAtClass.DeleteByID(h.store, id)
+	//check records exist
+	ats, _ := h.repo.CourseAtClass.GetByID(h.store, id)
+	if ats.ClassId == "" {
+		return util.HandleError(c, errors.ErrAtsNotfound)
+	}
 
-	c.JSON(http.StatusOK, "delete successfully the course_at_class with id: "+id)
+	_, err := h.repo.CourseAtClass.DeleteByID(h.store, id)
 
 	if err != nil {
 		return util.HandleError(c, errors.ErrInternalServerError)
 	}
 
-	return nil
+	return c.JSON(http.StatusOK, "delete successfully the course_at_class with id: "+id)
 }

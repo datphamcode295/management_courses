@@ -24,6 +24,7 @@ func NewRoutes(e *echo.Echo, h *handler.Handler, cfg config.Config, s repo.DBRep
 		classGroup.POST("/add", h.AddClass)
 		classGroup.GET("/students/:name", h.FindAllStudent)
 		classGroup.GET("/course/:name", h.FindAllCourses)
+		classGroup.DELETE("/id", h.DeleteClassByID)
 	}
 	courseGroup := apiV1Group.Group("/course")
 	{

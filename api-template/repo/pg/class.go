@@ -50,3 +50,10 @@ func (t *classRepo) GetAllStudent(s repo.DBRepo, id string) ([]model.Client, err
 
 	return students, db.Where("class_id=? AND role=?", id, "student").Find(&students).Error
 }
+
+func (t *classRepo) DeleteByID(s repo.DBRepo, id string) (*model.Class, error) {
+	db := s.DB()
+	var param model.Class
+
+	return &param, db.Where("id = ?", id).Delete(&param).Error
+}

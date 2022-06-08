@@ -13,11 +13,10 @@ func (h *Handler) GetAllClass(c echo.Context) error {
 
 	sliceClasses, err := h.repo.Class.GetAllClasses(h.store)
 
-	c.JSON(http.StatusOK, sliceClasses)
 	if err != nil {
 		return util.HandleError(c, errors.ErrInternalServerError)
 	}
-	return nil
+	return c.JSON(http.StatusOK, sliceClasses)
 }
 
 func (h *Handler) AddClass(c echo.Context) error {
@@ -108,4 +107,33 @@ func (h *Handler) FindAllCourses(c echo.Context) error {
 
 	return nil
 
+}
+
+func (h *Handler) DeleteClassByID(c echo.Context) error {
+	id := c.QueryParam("id")
+
+	username := c.QueryParam("username")
+	password := c.QueryParam("password")
+	role, checkerr := h.GetRole(c, username, password)
+	if checkerr != nil {
+		return util.HandleError(c, checkerr)
+	}
+	if role != "admin" {
+		return util.HandleError(c, errors.ErrUnAuthorized)
+	}
+
+	//check records exist
+	class, _ := h.repo.Class.GetClassByID(h.store, id)
+	if class.Name == "" {
+		return util.HandleError(c, errors.ErrClassNotfound)
+	}
+
+	_, err := h.repo.Class.DeleteByID(h.store, id)
+
+	if err != nil {
+		return util.HandleError(c, errors.ErrInternalServerError)
+	}
+	c.JSON(http.StatusOK, "delete successfully the class with id: "+id)
+
+	return nil
 }

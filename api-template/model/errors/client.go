@@ -8,5 +8,6 @@ var (
 	// ErrAtNotfound = NewStringError("CourseAtClass not found", http.StatusNotFound)
 	// ErrReferrerNotfound    = NewStringError("Referrer not found", http.StatusNotFound)
 	ErrClientAlreadyExits = NewStringError("Username already exits", http.StatusBadRequest)
+	ErrClientDoesNotExits = NewStringError("User does not exits", http.StatusNotFound)
 	// ErrInvalidReferralCode = NewStringError("Invalid referral code", http.StatusBadRequest)
 )

@@ -40,6 +40,7 @@ type ClassRepo interface {
 	GetClassByID(s DBRepo, id string) (*model.Class, error)
 	GetClassByName(s DBRepo, id string) (*model.Class, error)
 	GetAllStudent(s DBRepo, name string) ([]model.Client, error)
+	DeleteByID(s DBRepo, id string) (*model.Class, error)
 }
 
 type ClientRepo interface {
@@ -49,6 +50,7 @@ type ClientRepo interface {
 	UpdatePassword(s DBRepo, id string, password string) (*model.Client, error)
 	CheckingLogin(s DBRepo, username string, password string) (*model.Client, error)
 	GetByUsername(s DBRepo, username string) (*model.Client, error)
+	GetByID(s DBRepo, id string) (*model.Client, error)
 }
 
 type CourseRepo interface {
