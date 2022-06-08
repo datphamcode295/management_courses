@@ -7,11 +7,11 @@ import (
 
 type classRepo struct{}
 
-// func NewClassRepo() repo.ClassRepo {
-// 	return &classRepo{}
-// }
+func NewClassRepo() repo.ClassRepo {
+	return &classRepo{}
+}
 
-func GetAllClasses(s repo.DBRepo) ([]model.Class, error) { //
+func (t *classRepo) GetAllClasses(s repo.DBRepo) ([]model.Class, error) { //
 
 	tasks := []model.Class{}
 	db := s.DB()
@@ -22,51 +22,31 @@ func GetAllClasses(s repo.DBRepo) ([]model.Class, error) { //
 func (t *classRepo) PostClass(s repo.DBRepo, param model.Class) (*model.Class, error) {
 
 	db := s.DB()
-	o := model.Class{ID: "4"}
+
 	// return &param, db.Create(&param).Error
 
-	x := db.Create(&o)
-	return &o, x.Error
+	x := db.Create(&param)
+	return &param, x.Error
 
 }
 
-// func (t *classRepo) GetByReferralCode(s repo.DBRepo, referralCode string) (*model.Class, error) {
-// 	db := s.DB()
-// 	class := model.Class{}
-// 	return &class, db.Where("referral_code = ?", referralCode).First(&class).Error
-// }
+func (t *classRepo) GetClassByID(s repo.DBRepo, id string) (*model.Class, error) {
+	db := s.DB()
+	var class model.Class
 
-// func (t *classRepo) GetByWalletAddress(s repo.DBRepo, walletAddress string) (*model.User, error) {
-// 	db := s.DB()
-// 	user := model.User{}
-// 	return &user, db.Where("wallet_address ~~* ?", walletAddress).First(&user).Error
-// }
+	return &class, db.Find(&class, "id=?", id).Error
+}
 
-// func (t *classRepo) GetByWalletAddressWithReferrer(s repo.DBRepo, walletAddress string) (*model.User, error) {
-// 	db := s.DB()
-// 	user := model.User{}
-// 	return &user, db.Where("wallet_address ~~* ?", walletAddress).Preload("Referrer").First(&user).Error
-// }
+func (t *classRepo) GetClassByName(s repo.DBRepo, name string) (*model.Class, error) {
+	db := s.DB()
+	var class model.Class
 
-// func (t *classRepo) UpdateById(s repo.DBRepo, id string, updateModel model.User) (*model.User, error) {
-// 	db := s.DB()
-// 	user := model.User{}
-// 	return &user, db.Model(&user).Where("id = ?", id).Updates(updateModel).Error
-// }
+	return &class, db.Find(&class, "name=?", name).Error
+}
 
-// func (t *classRepo) GetTotalFriendById(s repo.DBRepo, id string) (int64, error) {
-// 	db := s.DB()
-// 	var total int64
-// 	return total, db.Table("user").
-// 		Where("referred_by = ?", id).
-// 		Count(&total).Error
-// }
+func (t *classRepo) GetAllStudent(s repo.DBRepo, id string) ([]model.Client, error) {
+	db := s.DB()
+	students := []model.Client{}
 
-// func (t *classRepo) GetFriendsWithReferralReward(s repo.DBRepo, id string, address string) ([]model.User, error) {
-// 	db := s.DB()
-// 	users := []model.User{}
-// 	return users, db.
-// 		Where("referred_by = ?", id).
-// 		Preload("ReferredRewards", "owner_address ~~* ? AND status = ?", address, "claimed").
-// 		Find(&users).Error
-// }
+	return students, db.Where("class_id=? AND role=?", id, "student").Find(&students).Error
+}

@@ -10,6 +10,7 @@ CREATE TABLE "course_at_class" (
     REFERENCES course(id)
 );
 
+insert into course_at_class (id,class_id,course_id) values ('1','1','1');
 
 -- +migrate Down
 DROP TABLE IF EXISTS "course_at_class";

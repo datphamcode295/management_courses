@@ -16,9 +16,38 @@ func NewRoutes(e *echo.Echo, h *handler.Handler, cfg config.Config, s repo.DBRep
 		authGroup.GET("/challenge", h.GetChallengeHandler)
 	}
 
-	courseGroup := apiV1Group.Group(("/class"))
+	classGroup := apiV1Group.Group(("/class"))
 	{
-		courseGroup.GET("/all", h.GetAllClass)
-		courseGroup.POST("/add", h.AddClass)
+		classGroup.GET("/all", h.GetAllClass)
+		classGroup.GET("/id/:id", h.FindClassByID)
+		classGroup.GET("/name/:name", h.FindClassByName)
+		classGroup.POST("/add", h.AddClass)
+		classGroup.GET("/students/:name", h.FindAllStudent)
+		classGroup.GET("/course/:name", h.FindAllCourses)
 	}
+	courseGroup := apiV1Group.Group("/course")
+	{
+		courseGroup.GET("/all", h.GetAllCourse)
+		courseGroup.POST("/add", h.AddCourse)
+		courseGroup.DELETE("/id", h.DeleteCourseByID)
+		courseGroup.GET("/allClasses/:id", h.FindAllClasses)
+	}
+	atsGroup := apiV1Group.Group("/courseatclass")
+	{
+		atsGroup.GET("/all", h.GetAllAts)
+		atsGroup.GET("/:id", h.FindAtsByID)
+		atsGroup.POST("/add", h.AddAts)
+		atsGroup.DELETE("/id", h.DeleteAtsByID)
+
+	}
+	clientGroup := apiV1Group.Group("/client")
+	{
+		clientGroup.GET("/all", h.GetAllClient)
+		clientGroup.POST("/", h.AddClient)
+		clientGroup.DELETE("/:id", h.DeleteClient)
+		clientGroup.PUT("/", h.UpdateClientPasswordByID)
+		clientGroup.GET("/login", h.Login)
+
+	}
+
 }

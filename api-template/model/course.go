@@ -7,7 +7,7 @@ import (
 
 type Course struct {
 	ID       string `gorm:"not null" json:"id"`
-	Name     string
+	Name     string `json:"name"`
 	Lecturer string
 }
 

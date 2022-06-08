@@ -1,10 +1,9 @@
 -- +migrate Up
 CREATE TABLE "course" (
   "id" TEXT PRIMARY KEY,
-  "class_id" TEXT,
-  FOREIGN KEY (class_id)
-    REFERENCES class(id)
+  "name" TEXT,
+  "lecturer" TEXT
 );
-
+insert into "course" (id, name, lecturer) values ('1','math', 'thanh');
 -- +migrate Down
 DROP TABLE IF EXISTS "course";

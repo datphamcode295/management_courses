@@ -37,10 +37,30 @@ type UserRepo interface {
 type ClassRepo interface {
 	GetAllClasses(s DBRepo) ([]model.Class, error)
 	PostClass(s DBRepo, param model.Class) (*model.Class, error)
+	GetClassByID(s DBRepo, id string) (*model.Class, error)
+	GetClassByName(s DBRepo, id string) (*model.Class, error)
+	GetAllStudent(s DBRepo, name string) ([]model.Client, error)
 }
 
-type ClientRepo interface{}
+type ClientRepo interface {
+	GetAllClients(s DBRepo) ([]model.Client, error)
+	PostClient(s DBRepo, param model.Client) (*model.Client, error)
+	Delete(s DBRepo, id string) (*model.Client, error)
+	UpdatePassword(s DBRepo, id string, password string) (*model.Client, error)
+	CheckingLogin(s DBRepo, username string, password string) (*model.Client, error)
+}
 
-type CourseRepo interface{}
-
-type CourseAtClassRepo interface{}
+type CourseRepo interface {
+	GetAllCourses(s DBRepo) ([]model.Course, error)
+	PostCourse(s DBRepo, param model.Course) (*model.Course, error)
+	DeleteByID(s DBRepo, id string) (*model.Course, error)
+	GetCourseById(s DBRepo, id string) (*model.Course, error)
+}
+type CourseAtClassRepo interface {
+	GetAll(s DBRepo) ([]model.CourseAtClass, error)
+	PostAts(s DBRepo, param model.CourseAtClass) (*model.CourseAtClass, error)
+	DeleteByID(s DBRepo, id string) (*model.CourseAtClass, error)
+	GetByID(s DBRepo, id string) (*model.CourseAtClass, error)
+	GetByCourseID(s DBRepo, id string) ([]model.CourseAtClass, error)
+	GetByClassID(s DBRepo, id string) ([]model.CourseAtClass, error)
+}

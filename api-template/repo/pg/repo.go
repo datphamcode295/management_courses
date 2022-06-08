@@ -7,5 +7,9 @@ func NewRepo() *repo.Repo {
 		Transaction:    NewTransactionRepo(),
 		ProcessedBlock: NewProcessedBlockRepoo(),
 		User:           NewUserRepo(),
+		Class:          NewClassRepo(),
+		Course:         NewCourseRepo(),
+		CourseAtClass:  NewCourseAtClassRepo(),
+		Client:         NewClientRepo(),
 	}
 }

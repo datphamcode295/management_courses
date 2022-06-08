@@ -1,19 +1,94 @@
 package handler
 
-// import (
-// 	"net/http"
+import (
+	"net/http"
 
-// 	"github.com/MStation-io/api/model"
-// 	"github.com/labstack/echo/v4"
-// )
+	"github.com/MStation-io/api/model"
+	"github.com/MStation-io/api/model/errors"
+	"github.com/MStation-io/api/util"
+	"github.com/labstack/echo/v4"
+)
 
-// func (h *Handler) GetAllCourse(c echo.Context) {
-// 	var sliceUsers []model.Course
-// 	result, _ := db.Query("SELECT * FROM student")
-// 	for result.Next() {
-// 		var s model.Course
-// 		_ = result.Scan(&s.ID, &s.Fullname, &s.Age, &s.Location)
-// 		sliceUsers = append(sliceUsers, s)
-// 	}
-// 	return c.JSON(http.StatusOK, sliceUsers)
-// }
+func (h *Handler) GetAllCourse(c echo.Context) error {
+	sliceClasses, err := h.repo.Course.GetAllCourses(h.store)
+
+	c.JSON(http.StatusOK, sliceClasses)
+	if err != nil {
+		return util.HandleError(c, errors.ErrInternalServerError)
+	}
+	return nil
+
+}
+
+func (h *Handler) AddCourse(c echo.Context) error {
+
+	name := c.QueryParam("name")
+	lecturer := c.QueryParam("lecturer")
+
+	username := c.QueryParam("username")
+	password := c.QueryParam("password")
+	role, checkerr := h.GetRole(c, username, password)
+	if checkerr != nil {
+		return util.HandleError(c, checkerr)
+	}
+	if role != "admin" {
+		return util.HandleError(c, errors.ErrUnAuthorized)
+	}
+
+	param := model.Course{Name: name, Lecturer: lecturer}
+	course, err := h.repo.Course.PostCourse(h.store, param)
+
+	c.JSON(http.StatusOK, course)
+
+	if err != nil {
+		return util.HandleError(c, errors.ErrInternalServerError)
+	}
+	return nil
+}
+
+func (h *Handler) DeleteCourseByID(c echo.Context) error {
+	id := c.QueryParam("id")
+
+	username := c.QueryParam("username")
+	password := c.QueryParam("password")
+	role, checkerr := h.GetRole(c, username, password)
+	if checkerr != nil {
+		return util.HandleError(c, checkerr)
+	}
+	if role != "admin" {
+		return util.HandleError(c, errors.ErrUnAuthorized)
+	}
+
+	_, err := h.repo.Course.DeleteByID(h.store, id)
+
+	c.JSON(http.StatusOK, "delete successfully the course with id: "+id)
+
+	if err != nil {
+		return util.HandleError(c, err)
+	}
+
+	return nil
+}
+
+func (h *Handler) FindAllClasses(c echo.Context) error {
+	id := c.Param("id")
+	//get records(classid, userid)
+	records, err := h.repo.CourseAtClass.GetByCourseID(h.store, id)
+
+	if err != nil {
+		return util.HandleError(c, err)
+	}
+	var classes []model.Class
+
+	for _, e := range records {
+		temp, err := h.repo.Class.GetClassByID(h.store, e.ClassId)
+		if err != nil {
+			return util.HandleError(c, err)
+		}
+		classes = append(classes, *temp)
+	}
+
+	c.JSON(http.StatusOK, classes)
+
+	return nil
+}

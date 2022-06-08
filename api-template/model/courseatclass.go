@@ -7,8 +7,8 @@ import (
 
 type CourseAtClass struct {
 	ID       string `gorm:"not null" json:"id"`
-	Name     string
-	Lecturer string
+	ClassId  string
+	CourseId string
 }
 
 func (CourseAtClass) TableName() string {
