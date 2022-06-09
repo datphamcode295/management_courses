@@ -45,7 +45,7 @@ func NewRoutes(e *echo.Echo, h *handler.Handler, cfg config.Config, s repo.DBRep
 	{
 		clientGroup.GET("/all", h.GetAllClient)
 		clientGroup.POST("/", h.AddClient)
-		clientGroup.DELETE("/:id", h.DeleteClient)
+		clientGroup.DELETE("/id", h.DeleteClient)
 		clientGroup.PUT("/", h.UpdateClientPasswordByID)
 		clientGroup.GET("/login", h.Login)
 

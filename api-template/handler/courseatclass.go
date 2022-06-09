@@ -9,6 +9,15 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// GetAllCourseAtClass
+// @Summary get all record in table courseatclass
+// @Description get all record in table courseatclass
+// @Tags Course At Class
+// @Accept	json
+// @Produce  json
+// @Success 200 {object} model.CourseAtClass	"ok"
+// @Failure 400 {object} errors.Error
+// @Router /api/v1/courseatclass/all [get]
 func (h *Handler) GetAllAts(c echo.Context) error {
 	ats, err := h.repo.CourseAtClass.GetAll(h.store)
 
@@ -18,6 +27,17 @@ func (h *Handler) GetAllAts(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, ats)
 }
+
+// FindAtsByID
+// @Summary find CourseAtClass record by id
+// @Description find CourseAtClass record by id
+// @Tags Course At Class
+// @Accept	json
+// @Produce  json
+// @Param id path string true "id of row in CourseAtClass"
+// @Success 200 {object} model.CourseAtClass	"ok"
+// @Failure 400 {object} errors.Error
+// @Router /api/v1/courseatclass/{id} [get]
 func (h *Handler) FindAtsByID(c echo.Context) error {
 	id := c.Param("id")
 	at, err := h.repo.CourseAtClass.GetByID(h.store, id)
@@ -30,6 +50,20 @@ func (h *Handler) FindAtsByID(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, at)
 }
+
+// AddRelationshipCourseAtClass
+// @Summary add new relationship between course and class
+// @Description add new relationship between course and class
+// @Tags Course At Class
+// @Accept	json
+// @Produce  json
+// @Param course_id query string true "id of course"
+// @Param class_id query string true "id of class"
+// @Param username query string true "username"
+// @Param password query string true "password"
+// @Success 200 {object} model.CourseAtClass	"ok"
+// @Failure 400 {object} errors.Error
+// @Router /api/v1/courseatclass/add [post]
 func (h *Handler) AddAts(c echo.Context) error {
 	classid := c.QueryParam("classid")
 	courseid := c.QueryParam("courseid")
@@ -55,6 +89,18 @@ func (h *Handler) AddAts(c echo.Context) error {
 	return c.JSON(http.StatusOK, ats)
 }
 
+// DeleteRelationshipByID
+// @Summary delete relationship between course and class
+// @Description delete relationship between course and class
+// @Tags Course At Class
+// @Accept	json
+// @Produce  json
+// @Param id query string true "id of row in table"
+// @Param username query string true "username"
+// @Param password query string true "password"
+// @Success 200 {object} model.CourseAtClass	"ok"
+// @Failure 400 {object} errors.Error
+// @Router /api/v1/courseatclass/id [delete]
 func (h *Handler) DeleteAtsByID(c echo.Context) error {
 	id := c.QueryParam("id")
 
@@ -80,5 +126,5 @@ func (h *Handler) DeleteAtsByID(c echo.Context) error {
 		return util.HandleError(c, errors.ErrInternalServerError)
 	}
 
-	return c.JSON(http.StatusOK, "delete successfully the course_at_class with id: "+id)
+	return c.JSON(http.StatusOK, ats)
 }

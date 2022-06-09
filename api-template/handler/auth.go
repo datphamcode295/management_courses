@@ -29,16 +29,6 @@ type upsertWalletResponse struct {
 	Data responseData `json:"data"`
 }
 
-// UpsertWalletHandler
-// @Summary upsert wallet address
-// @Description upsert wallet address
-// @Tags Authentication
-// @Accept	json
-// @Produce  json
-// @Param walletAddress query string true "wallet address"
-// @Security ApiKeyAuth
-// @Success 200 {object} handler.upsertWalletResponse	"ok"
-// @Router /api/v1/auth/upsert-wallet [post]
 func (h *Handler) UpsertWalletHandler(c echo.Context) error {
 	walletAddress := c.QueryParam("walletAddress")
 
@@ -70,17 +60,6 @@ func (h *Handler) UpsertWalletHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, &upsertWalletResponse{Data: responseData{Message: "Success"}})
 }
 
-// GetChallengeHandler
-// @Summary get challenge
-// @Description get challenge
-// @Tags Authentication
-// @Accept	json
-// @Produce  json
-// @Security ApiKeyAuth
-// @Param address query string true "wallet address"
-// @Success 200 {object} handler.getChallengeResponse	"ok"
-// @Failure 400 {object} errors.Error
-// @Router /api/v1/auth/challenge [get]
 func (h *Handler) GetChallengeHandler(c echo.Context) error {
 	address := c.QueryParam("address")
 
